@@ -1,0 +1,32 @@
+version: "3"
+services:
+  db:
+    image: postgres:14
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: password
+    # DBはMacネイティブ(arm64)で動かしたほうが速いのでplatform指定なし
+
+  web:
+    build: .
+    # 【重要】ここを入れることで、AWS Fargateと同じ環境(Intel)をMac上で再現します
+    # これにより、Intel版しかないGoogle Chromeが動くようになります
+    platform: linux/amd64 
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    volumes:
+      - .:/myapp
+      - gem_cache:/gems  # gemのインストール先を永続化
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    environment:
+      # スクレイピング時にメモリ不足にならないよう設定
+      RUBY_YJIT_ENABLE: 1 
+    tty: true
+    stdin_open: true
+
+volumes:
+  db_data:
+  gem_cache:

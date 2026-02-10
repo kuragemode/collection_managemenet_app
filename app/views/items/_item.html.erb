@@ -1,0 +1,33 @@
+<div id="<%= dom_id item %>" class="bg-white overflow-hidden shadow rounded-lg hover:shadow-lg transition-shadow duration-300 flex flex-col">
+  <div class="h-48 bg-gray-200 flex items-center justify-center overflow-hidden">
+    <% if item.image.attached? %>
+      <%= image_tag item.image.variant(resize_to_fill: [400, 300]), class: "w-full h-full object-cover" %>
+    <% else %>
+      <span class="text-4xl">👟</span>
+    <% end %>
+  </div>
+
+  <div class="px-4 py-5 sm:p-6 flex-1">
+    <h3 class="text-lg leading-6 font-medium text-gray-900 mb-2">
+      <%= link_to item.name, item, class: "hover:text-indigo-600" %>
+    </h3>
+    
+    <div class="mt-4 grid grid-cols-2 gap-4">
+      <div>
+        <p class="text-xs text-gray-500 uppercase">購入価格</p>
+        <p class="text-sm font-medium text-gray-900">¥<%= number_with_delimiter(item.purchase_price) rescue 0 %></p>
+      </div>
+      <div>
+        <p class="text-xs text-gray-500 uppercase">現在相場</p>
+        <p class="text-lg font-bold text-green-600">
+          ¥<%= number_with_delimiter(item.current_market_price) rescue "---" %>
+        </p>
+      </div>
+    </div>
+  </div>
+  
+  <div class="bg-gray-50 px-4 py-4 sm:px-6 flex justify-between items-center border-t border-gray-100">
+    <%= link_to "詳細", item, class: "text-sm font-medium text-indigo-600 hover:text-indigo-500" %>
+    <span class="text-xs text-gray-400">最終更新: <%= time_ago_in_words(item.updated_at) %>前</span>
+  </div>
+</div>
