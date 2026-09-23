@@ -21,13 +21,13 @@
     
     <div class="flex justify-between items-end mt-4">
       <div>
-        <p class="text-xs text-slate-500 uppercase tracking-wider mb-1">Purchase Price</p>
+        <p class="text-xs text-slate-500 uppercase tracking-wider mb-1">購入価格</p>
         <p class="text-sm font-medium text-slate-300">¥<%= number_with_delimiter(item.purchase_price) rescue 0 %></p>
       </div>
       
       <% profit = (item.current_market_price.to_i - item.purchase_price.to_i) rescue 0 %>
       <div class="text-right">
-        <p class="text-xs text-slate-500 uppercase tracking-wider mb-1">Gain/Loss</p>
+        <p class="text-xs text-slate-500 uppercase tracking-wider mb-1">損益</p>
         <p class="text-sm font-bold <%= profit >= 0 ? 'text-emerald-400' : 'text-rose-400' %>">
           <%= profit >= 0 ? "+" : "" %>¥<%= number_with_delimiter(profit) %>
         </p>

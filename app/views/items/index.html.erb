@@ -1,22 +1,22 @@
 <div class="mb-10">
-  <h1 class="text-4xl font-extrabold text-white tracking-tight mb-2">Dashboard</h1>
-  <p class="text-slate-400">Welcome back, <%= current_user.email.split('@').first %>.</p>
+  <h1 class="text-4xl font-extrabold text-white tracking-tight mb-2">ダッシュボード</h1>
+  <p class="text-slate-400">おかえりなさい、<%= current_user.email.split('@').first %> さん。</p>
 </div>
 
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
   <div class="p-6 rounded-2xl bg-gradient-to-br from-indigo-900/50 to-slate-900/50 border border-indigo-500/20 backdrop-blur-sm">
-    <dt class="text-sm font-medium text-indigo-300 uppercase tracking-wider mb-2">Total Asset Value</dt>
+    <dt class="text-sm font-medium text-indigo-300 uppercase tracking-wider mb-2">総資産額</dt>
     <dd class="flex items-baseline">
       <span class="text-5xl font-black text-white tracking-tighter">
         ¥<%= number_with_delimiter(@items.sum { |i| i.current_market_price.to_i }) %>
       </span>
-      <span class="ml-2 text-sm text-emerald-400 font-medium bg-emerald-400/10 px-2 py-0.5 rounded-full">Estimated</span>
+      <span class="ml-2 text-sm text-emerald-400 font-medium bg-emerald-400/10 px-2 py-0.5 rounded-full">推定値</span>
     </dd>
   </div>
 
   <div class="p-6 rounded-2xl bg-slate-800/50 border border-white/5 backdrop-blur-sm flex items-center justify-between">
     <div>
-      <dt class="text-sm font-medium text-slate-400 uppercase tracking-wider mb-1">Total Items</dt>
+      <dt class="text-sm font-medium text-slate-400 uppercase tracking-wider mb-1">登録アイテム数</dt>
       <dd class="text-3xl font-bold text-white"><%= @items.count %></dd>
     </div>
     <div class="h-12 w-12 bg-slate-700/50 rounded-full flex items-center justify-center text-2xl">
